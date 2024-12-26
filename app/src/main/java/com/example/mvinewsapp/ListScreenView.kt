@@ -1,5 +1,6 @@
 package com.example.mvinewsapp
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mvinewsapp.data.models.Article
 import com.example.mvinewsapp.viewmodel.NewsViewModel
 
@@ -41,6 +43,7 @@ import org.orbitmvi.orbit.compose.collectAsState
 fun ListScreenView(viewModel: NewsViewModel) {
     val state by viewModel.collectAsState()
 
+
     Box(modifier = Modifier.fillMaxSize()) {
         when {
             //when loading is true, show loader
@@ -54,9 +57,11 @@ fun ListScreenView(viewModel: NewsViewModel) {
                 //loading is false, so we know articles have been fetched. show the articles
 
                 LazyColumn {
+
                     state.articles?.let { articleList ->
                         items(articleList) { article ->
-                            ArticleCard(article, onClick = { viewModel.onListScreenCardClicked(article.title) } )
+                            ArticleCard(article, onClick = { viewModel.onListScreenCardClicked(article.articleId) } )
+                            Log.i("lkjh", article.articleId + " title " + article.title)
                         }?: item {Text(text = "article list is null")}
                     }
                 }
@@ -77,6 +82,7 @@ fun ListScreenView(viewModel: NewsViewModel) {
  */
 @Composable
 fun ArticleCard(article: Article, onClick: () -> Unit ) {
+
     Card(
         modifier = Modifier
             .fillMaxWidth()

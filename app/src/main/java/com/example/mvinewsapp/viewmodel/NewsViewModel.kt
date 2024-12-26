@@ -15,6 +15,8 @@ import com.example.mvinewsapp.orbit.NewsState
 import com.example.mvinewsapp.utils.Constant
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.viewmodel.container
+import java.util.UUID
+import kotlin.math.log
 
 
 /**
@@ -53,9 +55,16 @@ open class NewsViewModel(): ViewModel(), ContainerHost<NewsState, NewsSideEffect
             }
             if (fetchedData.isSuccessful) {
                 //request is successful, populate the state.articles
+                //NOTE: every article has a articleID that is initialized to null, we have
+                //to now generate an id per article by mapping over the articles
+
+                val newArticles = fetchedData.body()?.results?.mapIndexed{ index, article ->
+                    article.copy(articleId = UUID.randomUUID().toString())
+                }
+
                 reduce {
                     state.copy(
-                        articles = fetchedData.body()?.results ?: emptyList(),
+                        articles = newArticles,
                         isLoading = false
                     )
                 }
@@ -121,6 +130,10 @@ open class NewsViewModel(): ViewModel(), ContainerHost<NewsState, NewsSideEffect
      */
     open fun findArticleByTitle(title: String): Article? {
         return container.stateFlow.value.articles?.find { it.title==title }
+    }
+
+    fun findArticleByID(title: String): Article? {
+        return container.stateFlow.value.articles?.find { it.articleId==title }
     }
 
 

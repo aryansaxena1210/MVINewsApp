@@ -24,7 +24,7 @@ import com.example.mvinewsapp.viewmodel.NewsViewModel
 @Composable
 fun DetailScreenView( viewModel: NewsViewModel, title : String) {
 
-    val article = viewModel.findArticleByTitle(title)
+    val article = viewModel.findArticleByID(title)
 
     //display the title, byline, abstract and URL of this article in subsequent rows
 

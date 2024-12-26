@@ -1,5 +1,7 @@
 package com.example.mvinewsapp.data.models
 
+import java.util.UUID
+
 /**
  * Represents the response containing a list of articles from the NYTimes Top Stories API.
  *
@@ -19,6 +21,7 @@ data class TopStoriesResponse(
  * @property url The URL to read more about the article online.
  */
 data class Article(
+    val articleId: String = UUID.randomUUID().toString(),
     val title: String,
     val byline: String,
     val abstract: String,

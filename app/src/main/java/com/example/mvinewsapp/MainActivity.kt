@@ -42,9 +42,9 @@ class MainActivity : ComponentActivity() {
                     ListScreenView(viewModel)
                 }
 
-                composable("articles/{articleTitle}"){ navBackStackEntry ->
-                    val articleTitle = navBackStackEntry.arguments?.getString("articleTitle")
-                    DetailScreenView(viewModel, articleTitle?: "")
+                composable("articles/{articleId}"){ navBackStackEntry ->
+                    val articleId = navBackStackEntry.arguments?.getString("articleId")
+                    DetailScreenView(viewModel, articleId?: "")
 
                 }
             }
