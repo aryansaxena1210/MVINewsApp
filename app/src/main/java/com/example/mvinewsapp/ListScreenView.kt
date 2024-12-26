@@ -61,7 +61,6 @@ fun ListScreenView(viewModel: NewsViewModel) {
                     state.articles?.let { articleList ->
                         items(articleList) { article ->
                             ArticleCard(article, onClick = { viewModel.onListScreenCardClicked(article.articleId) } )
-                            Log.i("lkjh", article.articleId + " title " + article.title)
                         }?: item {Text(text = "article list is null")}
                     }
                 }

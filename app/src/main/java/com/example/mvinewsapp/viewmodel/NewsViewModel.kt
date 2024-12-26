@@ -132,7 +132,7 @@ open class NewsViewModel(): ViewModel(), ContainerHost<NewsState, NewsSideEffect
         return container.stateFlow.value.articles?.find { it.title==title }
     }
 
-    fun findArticleByID(title: String): Article? {
+    open fun findArticleByID(title: String): Article? {
         return container.stateFlow.value.articles?.find { it.articleId==title }
     }
 

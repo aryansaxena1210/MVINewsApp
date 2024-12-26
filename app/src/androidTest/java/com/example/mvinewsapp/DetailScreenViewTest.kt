@@ -1,5 +1,6 @@
 package com.example.mvinewsapp
 
+import android.util.Log
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
@@ -43,7 +44,8 @@ class DetailScreenViewTest {
             }
         }
 
-        override fun findArticleByTitle(title: String): Article? {
+
+        override fun findArticleByID(title: String): Article? {
             return mockArticles.find { it.title == title }
         }
     }
